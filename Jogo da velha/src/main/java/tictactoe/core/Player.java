@@ -21,6 +21,7 @@ public class Player {
 	
 	public void play() {
 		Move move = inputMove();
+		//passando o play como parametro
 		board.play(this, move);
 	}
 
