@@ -10,9 +10,7 @@ public class Main {
 
 		game.play();
 		
-		System.out.println("Testando commit");
-
-
+		
 	}
 
 }

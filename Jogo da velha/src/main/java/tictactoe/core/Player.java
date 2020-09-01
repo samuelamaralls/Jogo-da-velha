@@ -19,10 +19,10 @@ public class Player {
 		return new Move(moveStr);
 	}
 	
-	public void play() {
+	public boolean play() {
 		Move move = inputMove();
 		//passando o play como parametro
-		board.play(this, move);
+		return board.play(this, move);
 	}
 
 	public String getName() {

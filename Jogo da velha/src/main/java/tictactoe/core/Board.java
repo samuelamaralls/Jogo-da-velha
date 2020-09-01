@@ -70,26 +70,40 @@ public class Board {
 		// TODO validar os documentos
 
 		matriz[i][j] = player.getSymbol();
-		
+
 		return checkRows(player) || checkCols(player) || checkDiagonal1(player) || checkDiagonal2(player);
-	}
-
-	private boolean checkRow(int i, Player player) {
-
-		char symbol = player.getSymbol();
-		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
-			if (matriz[i][j] != symbol) {
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	private boolean checkRows(Player player) {
 
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
 			if (checkRow(i, player)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	private boolean checkRow(int i, Player player) {
+
+		char symbol = player.getSymbol();
+		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
+			if (matriz[i][j] != symbol) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+	
+	
+
+	private boolean checkCol(int j, Player player) {
+
+		char symbol = player.getSymbol();
+		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
+			if (matriz[i][j] != symbol) {
 				return false;
 			}
 		}
@@ -97,11 +111,10 @@ public class Board {
 		return true;
 	}
 
-	private boolean checkCol(int j, Player player) {
+	private boolean checkCols(Player player) {
 
-		char symbol = player.getSymbol();
-		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
-			if (matriz[i][j] != symbol) {
+		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
+			if (checkRow(j, player)) {
 				return true;
 			}
 		}
@@ -109,19 +122,8 @@ public class Board {
 		return false;
 	}
 
-	private boolean checkCols(Player player) {
-
-		for (int j = 0; j < Constants.BOARD_SIZE; j++) {
-			if (checkRow(j, player)) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
 	private boolean checkDiagonal1(Player player) {
-		
+
 		char symbol = player.getSymbol();
 		for (int i = 0; i < Constants.BOARD_SIZE; i++) {
 			if (matriz[i][i] != symbol) {
@@ -133,16 +135,14 @@ public class Board {
 	}
 
 	private boolean checkDiagonal2(Player player) {
-		
+
 		char symbol = player.getSymbol();
-		for (int i = 2; i >= 0; i--) {
-			for (int j = 0; j < 2; j++) {
-				if (matriz[i][j] != symbol) {
-					return false;
-				}
+		for (int i = 2, j = 0; i >= 0; i--, j++) {
+			if (matriz[i][j] != symbol) {
+				return false;
 			}
 		}
-		
+
 		return true;
 	}
 }
