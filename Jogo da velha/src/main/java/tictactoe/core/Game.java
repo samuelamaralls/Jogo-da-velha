@@ -3,14 +3,18 @@ package tictactoe.core;
 import tictactoe.Constants;
 import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
+import tictactoe.score.ScoreManager;
 
 public class Game {
 
 	private Board board = new Board();
 	private Player[] players = new Player[Constants.SYMBOL_PLAYERS.length];
-	int currentPlayerIndex = -1;
+	private int currentPlayerIndex = -1;
+	private ScoreManager scoreManager;
 
 	public void play() {
+		
+		scoreManager = createScoreManager();
 
 		UI.printGameTitle();
 
@@ -47,6 +51,8 @@ public class Game {
 			UI.printText("O jogo terminou empatado!");
 		} else {
 			UI.printText("O jogador '" + winner.getName() + "' venceu o jogo!");
+			
+			scoreManager.saveScore(winner);
 		}
 
 		board.print();
@@ -57,7 +63,13 @@ public class Game {
 		String name = UI.readInput("Jogador " + (index + 1) + "=>");
 		char symbol = Constants.SYMBOL_PLAYERS[index];
 		Player player = new Player(name, board, symbol);
+		
+		Integer score = scoreManager.getScore(player);
 
+		if (score != null) {
+			UI.printText("O jogador ja possui " + score + " vitoria(s)");
+		} 
+		
 		UI.printText("O jogador " + name + " vai usar o simbolo '" + symbol + "'");
 
 		return player;
@@ -71,5 +83,10 @@ public class Game {
 			currentPlayerIndex = 0;
 		}
 		return players[currentPlayerIndex];
+	}
+	
+	private ScoreManager createScoreManager() {
+		//TODO retornar tipo correto
+		return null;
 	}
 }
