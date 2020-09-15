@@ -1,5 +1,6 @@
 package tictactoe.core;
 
+import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
 
 public class Player {
@@ -14,12 +15,12 @@ public class Player {
 		this.symbol = symbol;
 	}
 
-	private Move inputMove() {
+	private Move inputMove() throws InvalidMoveException {
 		String moveStr = UI.readInput("Jogador " + name + " -> ");
 		return new Move(moveStr);
 	}
 	
-	public boolean play() {
+	public boolean play() throws InvalidMoveException {
 		Move move = inputMove();
 		//passando o play como parametro
 		return board.play(this, move);

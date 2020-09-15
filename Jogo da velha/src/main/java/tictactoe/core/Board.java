@@ -1,6 +1,7 @@
 package tictactoe.core;
 
 import tictactoe.Constants;
+import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
 
 public class Board {
@@ -63,12 +64,17 @@ public class Board {
 
 	}
 
-	public boolean play(Player player, Move move) {
+	public boolean play(Player player, Move move) throws InvalidMoveException {
 		int i = move.getI();
 		int j = move.getJ();
 
-		// TODO validar os documentos
-
+		if (i < 0 || j < 0 || i >= matriz.length || j >= matriz.length) {
+			throw new InvalidMoveException("O intervalo da jogada é inválido!");
+		}
+		
+		if (matriz[i][j] != ' ') {
+			throw new InvalidMoveException("Essa jogada já foi realizada!");
+		}
 		matriz[i][j] = player.getSymbol();
 
 		return checkRows(player) || checkCols(player) || checkDiagonal1(player) || checkDiagonal2(player);
