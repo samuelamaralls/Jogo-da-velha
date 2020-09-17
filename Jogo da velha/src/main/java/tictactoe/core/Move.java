@@ -1,7 +1,5 @@
 package tictactoe.core;
 
-import tictactoe.InvalidMoveException;
-
 public class Move {
 
 	private int i;

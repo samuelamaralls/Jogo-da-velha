@@ -1,8 +1,10 @@
 package tictactoe.core;
 
+import java.io.IOException;
+
 import tictactoe.Constants;
-import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
+import tictactoe.score.FileScoreManager;
 import tictactoe.score.ScoreManager;
 
 public class Game {
@@ -12,7 +14,7 @@ public class Game {
 	private int currentPlayerIndex = -1;
 	private ScoreManager scoreManager;
 
-	public void play() {
+	public void play() throws IOException {
 		
 		scoreManager = createScoreManager();
 
@@ -85,8 +87,7 @@ public class Game {
 		return players[currentPlayerIndex];
 	}
 	
-	private ScoreManager createScoreManager() {
-		//TODO retornar tipo correto
-		return null;
+	private ScoreManager createScoreManager() throws IOException{
+		return new FileScoreManager();
 	}
 }

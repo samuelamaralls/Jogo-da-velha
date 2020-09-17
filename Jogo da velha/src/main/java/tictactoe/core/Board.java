@@ -1,7 +1,6 @@
 package tictactoe.core;
 
 import tictactoe.Constants;
-import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
 
 public class Board {
@@ -105,6 +104,7 @@ public class Board {
 	
 	
 
+	@SuppressWarnings("unused")
 	private boolean checkCol(int j, Player player) {
 
 		char symbol = player.getSymbol();

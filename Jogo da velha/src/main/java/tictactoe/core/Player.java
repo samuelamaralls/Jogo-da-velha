@@ -1,6 +1,5 @@
 package tictactoe.core;
 
-import tictactoe.InvalidMoveException;
 import tictactoe.UI.UI;
 
 public class Player {
